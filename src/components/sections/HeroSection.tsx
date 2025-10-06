@@ -1,8 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/jsx-no-comment-textnodes */
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+
+// Componente Button simplificado
+const Button = ({ children, size, variant, className, ...props }: { children: React.ReactNode, size?: string, variant?: string, className?: string }) => {
+  const baseStyles = "px-6 py-3 rounded-lg font-semibold transition-all duration-300";
+  const sizeStyles = size === "lg" ? "text-lg px-8 py-4" : "";
+  const variantStyles = variant === "outline"
+    ? "border-2"
+    : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl";
+
+  return (
+    <button className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+};
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,15 +39,15 @@ export default function HeroSection() {
   const techCategories = useMemo(() => [
     {
       category: "Frontend",
-      technologies: ["React", "Next.js", "Angular", "Vue.js", "TailwindCSS"]
+      technologies: ["REACT", "NEXT JS", "TAILWIND CSS"]
     },
     {
       category: "Backend",
-      technologies: ["Node.js", ".NET", "C#", "PHP", "Python", "Java"]
+      technologies: ["NODE JS", ".NET", "LARAVEL"]
     },
     {
       category: "Database",
-      technologies: ["SQL Server", "MySQL", "PostgreSQL", "MongoDB", "Firebase"]
+      technologies: ["PostgreSQL", "SQL SERVER", "MySQL", "MongoDB"]
     }
   ], []);
 
@@ -124,7 +140,7 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, [frontendText, frontendDeleting, frontendIndex, techCategories]);
 
-  // Backend typing effect (con delay inicial)
+  // Backend typing effect
   useEffect(() => {
     const currentTech = techCategories[1].technologies[backendIndex];
 
@@ -149,7 +165,7 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, [backendText, backendDeleting, backendIndex, techCategories]);
 
-  // Database typing effect (con delay inicial)
+  // Database typing effect
   useEffect(() => {
     const currentTech = techCategories[2].technologies[databaseIndex];
 
@@ -176,7 +192,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden pt-20">
-      {/* YouTube Video Background with overlay */}
+      {/* YouTube Video Background with stronger overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 w-full h-full">
           <iframe
@@ -190,7 +206,9 @@ export default function HeroSection() {
             }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-indigo-900/60 z-[1]"></div>
+        {/* Overlay más oscuro y con más capas para mejor contraste */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/85 to-indigo-900/85 z-[1]"></div>
+        <div className="absolute inset-0 bg-black/30 z-[1]"></div>
       </div>
 
       {/* Decorative elements */}
@@ -206,14 +224,14 @@ export default function HeroSection() {
             animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-white/80 text-sm font-medium uppercase tracking-wider">
+            <span className="text-white/90 text-sm font-medium uppercase tracking-wider">
               Enfocado en soluciones digitales profesionales que impulsan negocios
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mt-3 mb-6 min-h-[3em]">
               {title}
               <span className={`ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
             </h1>
-            <p className="text-xl text-white/80 mb-8 max-w-lg">
+            <p className="text-xl text-white/90 mb-8 max-w-lg">
               Transformamos sus ideas en experiencias digitales excepcionales. Nuestras soluciones web están diseñadas para destacar su marca, aumentar conversiones y brindar resultados tangibles para su negocio.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -232,54 +250,95 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative hidden lg:block"
           >
-            <div className="relative bg-black/30 backdrop-blur-sm shadow-2xl rounded-2xl p-4 lg:p-6 aspect-video w-full overflow-hidden border border-white/10">
-              <div className="relative z-10 flex flex-col h-full">
+            <div className="relative bg-black/40 backdrop-blur-sm shadow-2xl rounded-2xl p-6 w-full overflow-hidden border border-white/20">
+              <div className="relative z-10 flex flex-col">
                 <div className="flex mb-4">
                   <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
                   <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
-                <div className="flex-1 bg-gray-900 rounded-lg overflow-hidden shadow-lg flex flex-col">
-                  <div className="bg-gray-800 p-3 text-xs text-gray-300 font-mono">
+                <div className="bg-gray-900 rounded-lg overflow-hidden shadow-lg flex flex-col">
+                  <div className="bg-gray-800 p-3 text-sm text-gray-300 font-mono">
                     <span className="text-white/80">ezdev.cr</span> ~ Technologies
                   </div>
-                  <div className="p-4 flex-1 text-green-500 font-mono text-sm overflow-hidden space-y-2">
+                  <div className="p-6 text-green-500 font-mono overflow-auto flex flex-col justify-start space-y-5 min-h-[500px]">
+                    {/* Línea de inicio */}
+                    <div className="text-gray-400 text-sm">
+                      <span className="text-purple-400">function</span>{" "}
+                      <span className="text-yellow-300">buildYourSuccess</span>
+                      <span className="text-white">() {"{"}</span>
+                    </div>
+
                     {/* Frontend */}
-                    <div className="flex items-center">
+                    <div className="flex items-center text-base pl-4">
                       <span className="text-blue-400">const</span>
                       <span className="text-yellow-400 mx-2">Frontend</span>
-                      <span className="text-white"> = </span>
-                      <span className="text-green-300 ml-2 min-w-[120px]">
+                      <span className="text-white">=</span>
+                      <span className="text-[#00ff41] ml-2 min-w-[140px] font-semibold" style={{ textShadow: '0 0 10px rgba(0, 255, 65, 0.8)' }}>
                         {frontendText}
                         <span className={`ml-1 ${techCursorVisible ? 'opacity-100' : 'opacity-0'}`}>|</span>
                       </span>
                     </div>
 
                     {/* Backend */}
-                    <div className="flex items-center">
+                    <div className="flex items-center text-base pl-4">
                       <span className="text-blue-400">const</span>
                       <span className="text-yellow-400 mx-2">Backend</span>
-                      <span className="text-white"> = </span>
-                      <span className="text-green-300 ml-2 min-w-[120px]">
+                      <span className="text-white">=</span>
+                      <span className="text-[#00ff41] ml-2 min-w-[140px] font-semibold" style={{ textShadow: '0 0 10px rgba(0, 255, 65, 0.8)' }}>
                         {backendText}
                         <span className={`ml-1 ${techCursorVisible ? 'opacity-100' : 'opacity-0'}`}>|</span>
                       </span>
                     </div>
 
                     {/* Database */}
-                    <div className="flex items-center">
+                    <div className="flex items-center text-base pl-4">
                       <span className="text-blue-400">const</span>
                       <span className="text-yellow-400 mx-2">Database</span>
-                      <span className="text-white"> = </span>
-                      <span className="text-green-300 ml-2 min-w-[120px]">
+                      <span className="text-white">=</span>
+                      <span className="text-[#00ff41] ml-2 min-w-[140px] font-semibold" style={{ textShadow: '0 0 10px rgba(0, 255, 65, 0.8)' }}>
                         {databaseText}
                         <span className={`ml-1 ${techCursorVisible ? 'opacity-100' : 'opacity-0'}`}>|</span>
                       </span>
                     </div>
+
+
+                    {/* Mensaje persuasivo */}
+                    <div className="mt-6 pt-4 border-t border-gray-700 pl-4">
+                      <div className="text-cyan-400 text-sm mb-3">
+                        <span className="text-gray-500">// </span>Tecnología de vanguardia para impulsar tu presencia digital
+                      </div>
+                      <div className="text-white/90 text-sm leading-relaxed space-y-2">
+                        <div>
+                          <span className="text-purple-400">¿Listo para transformar tu negocio</span> y alcanzar{" "}
+                          <span className="text-yellow-300">resultados extraordinarios en el mundo digital</span>?
+                        </div>
+                        <div className="text-gray-300 mt-3">
+                          <span className="text-green-400">✓</span> Sitios web optimizados para máxima conversión
+                        </div>
+                        <div className="text-gray-300">
+                          <span className="text-green-400">✓</span> Diseño responsive perfectamente adaptado
+                        </div>
+                        <div className="text-gray-300">
+                          <span className="text-green-400">✓</span> SEO integrado y estrategias avanzadas
+                        </div>
+                        <div className="text-gray-300">
+                          <span className="text-green-400">✓</span> Soporte técnico continuo 24/7
+                        </div>
+                      </div>
+                      <div className="text-green-400 text-sm mt-4 animate-pulse">
+                        → Contacta ahora y recibe una <span className="text-yellow-300 font-semibold">consultoría estratégica gratis</span>
+                      </div>
+                    </div>
+
+                    {/* Cierre de función */}
+                    <div className="text-gray-400 text-sm">
+                      <span className="text-white">{"}"}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-primary/30 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-blue-500/30 rounded-full blur-2xl"></div>
             </div>
           </motion.div>
         </div>
