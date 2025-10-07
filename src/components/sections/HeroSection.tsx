@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-no-comment-textnodes */
 "use client";
 
@@ -6,7 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 
 // Componente Button simplificado
-const Button = ({ children, size, variant, className, ...props }: { children: React.ReactNode, size?: string, variant?: string, className?: string }) => {
+const Button = ({ children, size, variant, className  , ...props }: { children: React.ReactNode, size?: string, variant?: string, className?: string, onClick?: () => void }) => {
   const baseStyles = "px-6 py-3 rounded-lg font-semibold transition-all duration-300";
   const sizeStyles = size === "lg" ? "text-lg px-8 py-4" : "";
   const variantStyles = variant === "outline"
@@ -39,15 +38,15 @@ export default function HeroSection() {
   const techCategories = useMemo(() => [
     {
       category: "Frontend",
-      technologies: ["REACT", "NEXT JS", "TAILWIND CSS"]
+      technologies: ["React", "Next.js", "Angular", "Vue.js", "TailwindCSS"]
     },
     {
       category: "Backend",
-      technologies: ["NODE JS", ".NET", "LARAVEL"]
+      technologies: ["Node.js", ".NET", "C#", "PHP", "Python", "Java"]
     },
     {
       category: "Database",
-      technologies: ["PostgreSQL", "SQL SERVER", "MySQL", "MongoDB"]
+      technologies: ["SQL Server", "MySQL", "PostgreSQL", "MongoDB", "Firebase"]
     }
   ], []);
 
@@ -235,8 +234,13 @@ export default function HeroSection() {
               Transformamos sus ideas en experiencias digitales excepcionales. Nuestras soluciones web están diseñadas para destacar su marca, aumentar conversiones y brindar resultados tangibles para su negocio.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button size="lg" variant="default" className="text-base">
-                Solicitar Consulta
+              <Button
+                size="lg"
+                variant="default"
+                className="text-base"
+                onClick={() => window.open('https://wa.me/50686462423?text=Hola,%20estoy%20interesado%20en%20sus%20servicios%20de%20desarrollo%20web', '_blank')}
+              >
+                Contactar por WhatsApp
               </Button>
               <Button size="lg" variant="outline" className="text-base bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
                 Ver Proyectos
@@ -302,7 +306,6 @@ export default function HeroSection() {
                       </span>
                     </div>
 
-
                     {/* Mensaje persuasivo */}
                     <div className="mt-6 pt-4 border-t border-gray-700 pl-4">
                       <div className="text-cyan-400 text-sm mb-3">
@@ -326,7 +329,15 @@ export default function HeroSection() {
                           <span className="text-green-400">✓</span> Soporte técnico continuo 24/7
                         </div>
                       </div>
-                      <div className="text-green-400 text-sm mt-4 animate-pulse">
+                      <div
+                        className="text-green-400 text-sm mt-4 animate-pulse cursor-pointer hover:text-green-300 transition-colors"
+                        onClick={() => {
+                          const contactSection = document.querySelector('#contact-section');
+                          if (contactSection) {
+                            contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }}
+                      >
                         → Contacta ahora y recibe una <span className="text-yellow-300 font-semibold">consultoría estratégica gratis</span>
                       </div>
                     </div>
