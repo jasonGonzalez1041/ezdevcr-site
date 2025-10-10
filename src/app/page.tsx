@@ -8,6 +8,7 @@ import BlogSection from "@/components/sections/BlogSection";
 import ContactSection from "@/components/sections/ContactSection";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PricingSection from "@/components/sections/PricingSection";
 
 export default function HomePage() {
   const heroRef = useRef(null);
@@ -65,6 +66,9 @@ export default function HomePage() {
       </div>
       <div id="servicios" ref={servicesRef}>
         <ServicesSection />
+      </div>
+      <div id="pricing">
+        <PricingSection />
       </div>
       <div id="proyectos">
         <ProjectsSection />

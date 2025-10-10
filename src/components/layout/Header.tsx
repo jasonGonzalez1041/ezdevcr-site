@@ -159,6 +159,13 @@ export default function Header() {
                             Servicios
                         </a>
                         <a
+                            href="#precios"
+                            onClick={(e) => scrollToSection(e, "precios")}
+                            className="text-lg font-medium text-primary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400"
+                        >
+                            Precios
+                        </a>
+                        <a
                             href="#proyectos"
                             onClick={(e) => scrollToSection(e, "proyectos")}
                             className="text-lg font-medium text-primary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400"
